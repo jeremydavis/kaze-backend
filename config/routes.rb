@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :currencies
+
   devise_for :users
 
   get 'welcome/index'
