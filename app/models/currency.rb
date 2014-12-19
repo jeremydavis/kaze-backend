@@ -11,6 +11,5 @@ class Currency < ActiveRecord::Base
   private
   def normalise_names
     self.shortname = self.shortname.upcase
-    self.longname = self.longname.titleize
   end
 end
