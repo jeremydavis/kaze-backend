@@ -1,9 +1,10 @@
 class Currency < ActiveRecord::Base
-  validates :shortname, :longname, presence: true
-  before_validation :upcase_shortname
+  validates :shortname, :longname, presence: true, uniqueness: true
+  before_validation :normalise_names
 
   private
-  def upcase_shortname
+  def normalise_names
     self.shortname = self.shortname.upcase
+    self.longname = self.longname.titleize
   end
 end
