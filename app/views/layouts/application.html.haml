@@ -9,6 +9,6 @@
     = csrf_meta_tags
   %body
     %header= render 'layouts/navigation'
-    %main{:role => "main"}
+    %main{role: "main", class: 'container-fluid'}
       = render 'layouts/messages'
       = yield
