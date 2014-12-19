@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219053234) do
+ActiveRecord::Schema.define(version: 20141219054919) do
 
   create_table "currencies", force: true do |t|
     t.string   "shortname"
     t.string   "longname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payees", force: true do |t|
+    t.string   "nickname"
+    t.string   "account_holder"
+    t.integer  "account_number"
+    t.string   "bank_name"
+    t.string   "branch_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

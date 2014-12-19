@@ -1,0 +1,29 @@
+%h1 Listing payees
+
+%table
+  %thead
+    %tr
+      %th Nickname
+      %th Account holder
+      %th Account number
+      %th Bank name
+      %th Branch name
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @payees.each do |payee|
+      %tr
+        %td= payee.nickname
+        %td= payee.account_holder
+        %td= payee.account_number
+        %td= payee.bank_name
+        %td= payee.branch_name
+        %td= link_to 'Show', payee
+        %td= link_to 'Edit', edit_payee_path(payee)
+        %td= link_to 'Destroy', payee, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Payee', new_payee_path

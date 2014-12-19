@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Nickname:
+  = @payee.nickname
+%p
+  %b Account holder:
+  = @payee.account_holder
+%p
+  %b Account number:
+  = @payee.account_number
+%p
+  %b Bank name:
+  = @payee.bank_name
+%p
+  %b Branch name:
+  = @payee.branch_name
+
+= link_to 'Edit', edit_payee_path(@payee)
+\|
+= link_to 'Back', payees_path

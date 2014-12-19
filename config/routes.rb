@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :payees
+
   resources :currencies
 
   devise_for :users

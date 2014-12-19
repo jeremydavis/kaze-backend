@@ -1,0 +1,12 @@
+= simple_form_for(@payee) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :nickname
+    = f.input :account_holder
+    = f.input :account_number
+    = f.input :bank_name
+    = f.input :branch_name
+
+  .form-actions
+    = f.button :submit
