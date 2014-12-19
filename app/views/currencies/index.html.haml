@@ -1,6 +1,6 @@
 %h1 Listing currencies
 
-%table
+%table.table.table-striped.table-condensed.table-hover
   %thead
     %tr
       %th Shortname
@@ -8,16 +8,16 @@
       %th
       %th
       %th
-      
+
   %tbody
     - @currencies.each do |currency|
       %tr
         %td= currency.shortname
         %td= currency.longname
-        %td= link_to 'Show', currency
-        %td= link_to 'Edit', edit_currency_path(currency)
-        %td= link_to 'Destroy', currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to t('Show'), currency
+        %td= link_to t('Edit'), edit_currency_path(currency)
+        %td= link_to t('Destroy'), currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Currency', new_currency_path
+= link_to t('New Currency'), new_currency_path

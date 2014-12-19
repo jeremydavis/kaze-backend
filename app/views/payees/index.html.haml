@@ -1,6 +1,6 @@
 %h1 Listing payees
 
-%table
+%table.table.table-striped.table-condensed.table-hover
   %thead
     %tr
       %th Nickname
@@ -11,7 +11,7 @@
       %th
       %th
       %th
-      
+
   %tbody
     - @payees.each do |payee|
       %tr
@@ -20,9 +20,12 @@
         %td= payee.account_number
         %td= payee.bank_name
         %td= payee.branch_name
-        %td= link_to 'Show', payee
-        %td= link_to 'Edit', edit_payee_path(payee)
-        %td= link_to 'Destroy', payee, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          = link_to 'Show', payee
+          &nbsp;|&nbsp;
+          = link_to 'Edit', edit_payee_path(payee)
+          &nbsp;|&nbsp;
+          = link_to 'Destroy', payee, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
