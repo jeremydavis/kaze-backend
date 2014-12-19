@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :transfers
+
   resources :accounts
 
   resources :payees

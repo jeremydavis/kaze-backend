@@ -1,0 +1,44 @@
+%h1 Listing transfers
+
+%table.table.table-striped.table-condensed.table-hover
+  %thead
+    %tr
+      %th Account
+      %th Payee
+      %th Currency
+      %th Value
+      %th Description
+      %th Transfer date
+      %th Repeat
+      %th Repeat until
+      %th Status
+      %th Submitted at
+      %th Transaction password valid?
+      %th OTP password valid?
+      %th
+
+  %tbody
+    - @transfers.each do |transfer|
+      %tr
+        %td= transfer.account.try(:to_label)
+        %td= transfer.payee.try(:to_label)
+        %td= transfer.currency.try(:to_label)
+        %td= transfer.value
+        %td= transfer.description
+        %td= transfer.transfer_date
+        %td= transfer.repeat
+        %td= transfer.repeat_until
+        %td= transfer.status
+        %td= transfer.submitted_at
+        %td= transfer.transaction_password_valid
+        %td= transfer.otp_password_valid
+        %td
+          = link_to 'Show', transfer
+          &nbsp;|&nbsp;
+          = link_to 'Edit', edit_transfer_path(transfer)
+          &nbsp;|&nbsp;
+          = link_to 'Destroy', transfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Transfer', new_transfer_path

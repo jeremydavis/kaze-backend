@@ -3,6 +3,7 @@ class Currency < ActiveRecord::Base
   before_validation :normalise_names
 
   has_many :accounts
+  has_many :transfers
 
   def to_label
     return "#{self.shortname} - #{self.longname}"

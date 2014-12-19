@@ -1,0 +1,1 @@
+json.extract! @transfer, :id, :account_id, :payee_id, :currency_id, :value, :description, :transfer_date, :repeat, :repeat_until, :status, :submitted_at, :transaction_password_valid, :otp_password_valid, :created_at, :updated_at

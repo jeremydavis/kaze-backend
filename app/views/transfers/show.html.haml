@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Account:
+  = @transfer.account_id
+%p
+  %b Payee:
+  = @transfer.payee_id
+%p
+  %b Currency:
+  = @transfer.currency_id
+%p
+  %b Value:
+  = @transfer.value
+%p
+  %b Description:
+  = @transfer.description
+%p
+  %b Transfer date:
+  = @transfer.transfer_date
+%p
+  %b Repeat:
+  = @transfer.repeat
+%p
+  %b Repeat until:
+  = @transfer.repeat_until
+%p
+  %b Status:
+  = @transfer.status
+%p
+  %b Submitted at:
+  = @transfer.submitted_at
+%p
+  %b Transaction password valid:
+  = @transfer.transaction_password_valid
+%p
+  %b Otp password valid:
+  = @transfer.otp_password_valid
+
+= link_to 'Edit', edit_transfer_path(@transfer)
+\|
+= link_to 'Back', transfers_path

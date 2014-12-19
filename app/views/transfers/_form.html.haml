@@ -1,0 +1,19 @@
+= simple_form_for(@transfer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .form-group
+      = f.association :account, prompt: 'Select an Account'
+    .form-group
+      = f.association :payee, prompt: 'Select a Payee'
+    .form-group
+      = f.association :currency, prompt: 'Select a Currency'
+      = f.input :value
+      = f.input :description
+    .form-group
+      = f.input :transfer_date
+      = f.input :repeat
+      = f.input :repeat_until
+
+  .form-actions
+    = f.button :submit
