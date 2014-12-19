@@ -6,17 +6,18 @@
       %th Shortname
       %th Longname
       %th
-      %th
-      %th
 
   %tbody
     - @currencies.each do |currency|
       %tr
         %td= currency.shortname
         %td= currency.longname
-        %td= link_to t('Show'), currency
-        %td= link_to t('Edit'), edit_currency_path(currency)
-        %td= link_to t('Destroy'), currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          = link_to t('Show'), currency
+          &nbsp;|&nbsp;
+          = link_to t('Edit'), edit_currency_path(currency)
+          &nbsp;|&nbsp;
+          = link_to t('Destroy'), currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
