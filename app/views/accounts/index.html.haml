@@ -1,0 +1,26 @@
+%h1 Listing accounts
+
+%table.table.table-striped.table-condensed.table-hover
+  %thead
+    %tr
+      %th Account number
+      %th Currency
+      %th Balance
+      %th
+
+  %tbody
+    - @accounts.each do |account|
+      %tr
+        %td= account.account_number
+        %td= account.currency.try(:to_label)
+        %td= account.balance
+        %td
+          = link_to 'Show', account
+          &nbsp;|&nbsp;
+          = link_to 'Edit', edit_account_path(account)
+          &nbsp;|&nbsp;
+          = link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Account', new_account_path
