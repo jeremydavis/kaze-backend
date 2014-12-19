@@ -1,1 +1,4 @@
-%li= link_to 'Help', welcome_help_path
+- if user_signed_in?
+  %li= link_to t('currencies'), currencies_path
+
+%li= link_to t('Help'), welcome_help_path
