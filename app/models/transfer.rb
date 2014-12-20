@@ -23,6 +23,8 @@ class Transfer < ActiveRecord::Base
 
   after_validation :clear_transaction_password, if: :transaction_password
 
+  before_create :set_status_as_submitted
+
   private
   def transfer_date_is_in_the_future
     if self.transfer_date < Date.today
@@ -47,4 +49,9 @@ class Transfer < ActiveRecord::Base
   def clear_transaction_password
     self.transaction_password = nil
   end
+  def set_status_as_submitted
+    raise "Invalid starting status for transaction: '#{self.status}'" unless self.status.blank?
+    self.status = 'SUBMITTED'
+    self.submitted_at = Time.now
+ end
 end
