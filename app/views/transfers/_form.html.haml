@@ -11,9 +11,9 @@
       = f.input :value
       = f.input :description
     .form-group
-      = f.input :transfer_date
+      = f.input :transfer_date, as: :date_picker
       = f.input :repeat
-      = f.input :repeat_until
+      = f.input :repeat_until, as: :date_picker
 
   .form-actions
     = f.button :submit

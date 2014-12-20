@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/derekprior/momentjs-rails.git
+  revision: b3ed842ff862a12fa82979c0b629cbd6be8b1151
+  specs:
+    momentjs-rails (2.8.3)
+      railties (>= 3.1)
+
+GIT
   remote: git://github.com/elevation/detect_timezone_rails.git
   revision: 92aa34c192ba3ab9a5e5d8371cc56af5f569715e
   specs:
@@ -18,6 +25,14 @@ GIT
   revision: 650bb117fa08f48c2a80df8284708a3afef18802
   specs:
     database_cleaner (0.9.1)
+
+GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: d0f8a68f30d7ffb34e505845a693df27467424f3
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (3.1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -354,6 +369,7 @@ DEPENDENCIES
   cucumber-api-steps!
   cucumber-rails
   database_cleaner!
+  datetimepicker-rails!
   detect_timezone_rails!
   devise
   email_spec
@@ -371,6 +387,7 @@ DEPENDENCIES
   less-rails
   liquid
   lorem
+  momentjs-rails (>= 2.8.1)!
   nokogiri
   paper_trail
   phantomjs

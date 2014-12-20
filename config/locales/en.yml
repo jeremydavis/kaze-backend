@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  datepicker:
+    dformat: '%d/%m/%Y'
+    pformat: 'DD/MM/YYYY'
+    weekstart: 0
+  timepicker:
+    dformat: '%R'
+    pformat: 'HH:mm'

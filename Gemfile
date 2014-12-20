@@ -24,6 +24,11 @@ gem 'turbolinks'
 gem 'devise'
 gem 'bcrypt'
 
+# Datetime Picker
+gem 'momentjs-rails', '>= 2.8.1', :github => 'derekprior/momentjs-rails'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+
+# Assets
 gem 'coffee-rails'
 gem 'less-rails'
 gem 'sass-rails'

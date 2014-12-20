@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//
+// Datetimepicker Dependencies
+//= require moment
+//= require bootstrap-datetimepicker
+//= require pickers
+//
+// Require all asset javascript
 //= require_tree .
