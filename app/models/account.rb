@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   before_validation :normalise_account_number
+
   belongs_to :currency
   has_many :transfers
 

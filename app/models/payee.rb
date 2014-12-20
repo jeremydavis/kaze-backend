@@ -1,8 +1,8 @@
 class Payee < ActiveRecord::Base
-  validates :nickname, :account_holder, :account_number, :bank_name, :branch_name, presence: true
-  before_validation :normalise_account_number
-
   has_many :transfers
+
+  before_validation :normalise_account_number
+  validates :nickname, :account_holder, :account_number, :bank_name, :branch_name, presence: true
 
   def to_label
     return "#{self.nickname} - #{self.account_number}"
