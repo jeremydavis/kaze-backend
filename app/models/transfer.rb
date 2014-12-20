@@ -5,6 +5,10 @@ class Transfer < ActiveRecord::Base
 
   attr_accessor :transaction_password
 
+  after_initialize do
+    self.transfer_date = Date.today
+  end
+
   validates :account_id,
             :payee_id,
             :currency_id,
@@ -21,7 +25,7 @@ class Transfer < ActiveRecord::Base
 
   private
   def transfer_date_is_in_the_future
-    if self.transfer_date <= Date.today
+    if self.transfer_date < Date.today
       errors.add(:transfer_date, 'Transfer Date cannot be in the past')
     end
   end
