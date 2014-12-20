@@ -8,7 +8,7 @@
       = f.association :payee, prompt: 'Select a Payee'
     .form-group
       = f.association :currency, prompt: 'Select a Currency'
-      = f.input :value
+      = f.input :value, as: :decimal
       = f.input :description
     .form-group
       = f.input :transfer_date, as: :date_picker
