@@ -6,7 +6,7 @@ class Transfer < ActiveRecord::Base
   attr_accessor :transaction_password
 
   after_initialize do
-    self.transfer_date = Date.today
+    self.transfer_date = Date.today if self.new_record?
   end
 
   validates :account_id,
@@ -15,11 +15,12 @@ class Transfer < ActiveRecord::Base
             :value,
             :description,
             :transfer_date,
-            :transaction_password,
             { presence: true }
-  validate :transfer_date_is_in_the_future, if: :transfer_date
+  validate :transfer_date_is_in_the_future, if: :transfer_date, on: :create
   validate :repeat_until_date_is_after_transfer_date, if: :repeat?
-  validate :confirm_transaction_password, if: :transaction_password
+
+  validates_presence_of :transaction_password, on: :create
+  validate :confirm_transaction_password, unless: :transaction_password_valid?
 
   after_validation :clear_transaction_password, if: :transaction_password
 
@@ -39,11 +40,11 @@ class Transfer < ActiveRecord::Base
   def confirm_transaction_password
     case self.transaction_password
     when '1234'
-      errors.add(:transaction_password, 'Password Expired')
+      errors.add(:transaction_password, 'Transaction Password Expired')
     when '234wer'
       self.transaction_password_valid = true
     else
-      errors.add(:transaction_password, "Password Invalid #{self.transaction_password}")
+      errors.add(:transaction_password, "Transaction Password Invalid")
     end
   end
   def clear_transaction_password
