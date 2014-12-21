@@ -19,13 +19,13 @@ class TransfersController < ApplicationController
   end
 
   def create
-    @transfer = Transfer.new(transfer_params)
+    @transfer = Transfer.new(create_params)
     @transfer.save
     respond_with(@transfer)
   end
 
   def update
-    @transfer.update(transfer_params)
+    @transfer.update(update_params)
     respond_with(@transfer)
   end
 
@@ -39,7 +39,7 @@ class TransfersController < ApplicationController
       @transfer = Transfer.find(params[:id])
     end
 
-    def transfer_params
+    def create_params
       params.require(:transfer).permit :account_id,
                                        :payee_id,
                                        :currency_id,
@@ -49,5 +49,9 @@ class TransfersController < ApplicationController
                                        :repeat,
                                        :repeat_until,
                                        :transaction_password
+    end
+
+    def update_params
+      params.require(:transfer).permit :description
     end
 end
