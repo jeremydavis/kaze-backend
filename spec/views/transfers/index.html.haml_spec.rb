@@ -12,7 +12,7 @@ RSpec.describe "transfers/index", :type => :view do
         :repeat => false,
         :status => "Status",
         :transaction_password_valid => false,
-        :otp_password_valid => false
+        :one_time_password_valid => false
       ),
       Transfer.create!(
         :account_id => 1,
@@ -23,7 +23,7 @@ RSpec.describe "transfers/index", :type => :view do
         :repeat => false,
         :status => "Status",
         :transaction_password_valid => false,
-        :otp_password_valid => false
+        :one_time_password_valid => false
       )
     ])
   end

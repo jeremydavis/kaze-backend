@@ -11,7 +11,7 @@ RSpec.describe "transfers/show", :type => :view do
       :repeat => false,
       :status => "Status",
       :transaction_password_valid => false,
-      :otp_password_valid => false
+      :one_time_password_valid => false
     ))
   end
 

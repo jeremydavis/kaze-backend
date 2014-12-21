@@ -11,7 +11,7 @@ RSpec.describe "transfers/edit", :type => :view do
       :repeat => false,
       :status => "MyString",
       :transaction_password_valid => false,
-      :otp_password_valid => false
+      :one_time_password_valid => false
     ))
   end
 
@@ -36,7 +36,7 @@ RSpec.describe "transfers/edit", :type => :view do
 
       assert_select "input#transfer_transaction_password_valid[name=?]", "transfer[transaction_password_valid]"
 
-      assert_select "input#transfer_otp_password_valid[name=?]", "transfer[otp_password_valid]"
+      assert_select "input#transfer_one_time_password_valid[name=?]", "transfer[one_time_password_valid]"
     end
   end
 end

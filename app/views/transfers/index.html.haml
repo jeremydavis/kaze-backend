@@ -13,8 +13,8 @@
       %th Repeat until
       %th Status
       %th Submitted at
-      %th Transaction password valid?
-      %th OTP password valid?
+      %th Transaction Password Valid?
+      %th OTP valid?
       %th
 
   %tbody
@@ -32,7 +32,7 @@
         %td
           %time= timeago_tag transfer.submitted_at
         %td= transfer.transaction_password_valid
-        %td= transfer.otp_password_valid
+        %td= transfer.one_time_password_valid
         %td
           = link_to 'Show', transfer
           &nbsp;|&nbsp;

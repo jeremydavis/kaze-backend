@@ -11,34 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219140750) do
+ActiveRecord::Schema.define(version: 20141221121913) do
 
-  create_table "accounts", force: true do |t|
-    t.string   "account_number"
+  create_table "accounts", force: :cascade do |t|
+    t.string   "account_number", limit: 255
     t.integer  "currency_id"
     t.decimal  "balance"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "currencies", force: true do |t|
-    t.string   "shortname"
-    t.string   "longname"
+  create_table "currencies", force: :cascade do |t|
+    t.string   "shortname",  limit: 255
+    t.string   "longname",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "payees", force: true do |t|
-    t.string   "nickname"
-    t.string   "account_holder"
-    t.string   "account_number"
-    t.string   "bank_name"
-    t.string   "branch_name"
+  create_table "payees", force: :cascade do |t|
+    t.string   "nickname",       limit: 255
+    t.string   "account_holder", limit: 255
+    t.string   "account_number", limit: 255
+    t.string   "bank_name",      limit: 255
+    t.string   "branch_name",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transfers", force: true do |t|
+  create_table "transfers", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "payee_id"
     t.integer  "currency_id"
@@ -47,25 +47,25 @@ ActiveRecord::Schema.define(version: 20141219140750) do
     t.date     "transfer_date"
     t.boolean  "repeat"
     t.date     "repeat_until"
-    t.string   "status"
+    t.string   "status",                     limit: 255
     t.datetime "submitted_at"
     t.boolean  "transaction_password_valid"
-    t.boolean  "otp_password_valid"
+    t.boolean  "one_time_password_valid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

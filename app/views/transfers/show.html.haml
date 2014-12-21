@@ -35,7 +35,7 @@
   = @transfer.transaction_password_valid
 %p
   %b Otp password valid:
-  = @transfer.otp_password_valid
+  = @transfer.one_time_password_valid
 
 = link_to 'Edit', edit_transfer_path(@transfer)
 \|
