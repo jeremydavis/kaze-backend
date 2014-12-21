@@ -21,15 +21,16 @@
     - @transfers.each do |transfer|
       %tr
         %td= transfer.account.try(:to_label)
-        %td= transfer.payee.try(:to_label)
-        %td= transfer.currency.try(:to_label)
+        %td= transfer.payee.try(:nickname)
+        %td= transfer.currency.try(:shortname)
         %td= transfer.value
         %td= transfer.description
         %td= transfer.transfer_date
         %td= transfer.repeat
         %td= transfer.repeat_until
         %td= transfer.status
-        %td= transfer.submitted_at
+        %td
+          %time= timeago_tag transfer.submitted_at
         %td= transfer.transaction_password_valid
         %td= transfer.otp_password_valid
         %td
