@@ -2,6 +2,11 @@
   = f.error_notification
 
   .form-inputs
+    = f.input :transaction_hash, as: :hidden
+    = f.input :initiated_at, as: :hidden
+    //= f.input :otp_was_requested, as: :hidden
+    //= f.input :transaction_password_valid, as: :hidden
+    //= f.input :one_time_password_valid, as: :hidden
     .form-group
       = f.association :account, prompt: 'Select an Account'
     .form-group
@@ -16,8 +21,11 @@
       = f.input :repeat_until, as: :date_picker
     .form-group
       = f.input :transaction_password, as: :string
+      = f.input :one_time_password, as: :string
+
   .form-actions
     .well.col-sm-9.col-sm-offset-3
-      = f.button :submit, :class=> 'btn-primary'
+      = f.button :submit, class: 'btn-primary'
+      = f.button :submit, "Resend Otp", class: 'btn-info', disabled: true
 
 .clearfix

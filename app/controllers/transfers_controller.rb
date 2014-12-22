@@ -48,7 +48,10 @@ class TransfersController < ApplicationController
                                        :transfer_date,
                                        :repeat,
                                        :repeat_until,
-                                       :transaction_password
+                                       :initiated_at,
+                                       :transaction_password,
+                                       :one_time_password,
+                                       :transaction_hash
     end
 
     def update_params
