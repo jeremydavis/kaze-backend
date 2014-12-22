@@ -126,7 +126,7 @@ SimpleForm.setup do |config|
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.form_class = 'simple_form form-horizontal'
+  config.default_form_class = 'simple_form form-horizontal'
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
     check_boxes: :horizontal_radio_and_checkboxes,
