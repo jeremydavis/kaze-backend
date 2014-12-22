@@ -2,13 +2,13 @@
 
 %p
   %b Account:
-  = @transfer.account_id
+  = @transfer.account.try(:to_label)
 %p
   %b Payee:
-  = @transfer.payee_id
+  = @transfer.payee.try(:to_label)
 %p
   %b Currency:
-  = @transfer.currency_id
+  = @transfer.currency.try(:to_label)
 %p
   %b Value:
   = @transfer.value
@@ -18,24 +18,16 @@
 %p
   %b Transfer date:
   = @transfer.transfer_date
-%p
-  %b Repeat:
-  = @transfer.repeat
-%p
-  %b Repeat until:
-  = @transfer.repeat_until
+- if @transfer.repeat?
+  %p
+    %b Repeat until:
+    = @transfer.repeat_until
 %p
   %b Status:
   = @transfer.status
 %p
   %b Submitted at:
-  = @transfer.submitted_at
-%p
-  %b Transaction password valid:
-  = @transfer.transaction_password_valid
-%p
-  %b Otp password valid:
-  = @transfer.one_time_password_valid
+  %time= timeago_tag @transfer.submitted_at
 
 = link_to 'Edit', edit_transfer_path(@transfer)
 \|
