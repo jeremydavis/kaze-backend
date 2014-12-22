@@ -50,6 +50,8 @@ module Confirmable
 
     def confirm_one_time_password
       case one_time_password
+      when ''
+        errors.add :one_time_password, 'Please enter the OTP sent to your phone'
       when '1234'
         errors.add :one_time_password, 'One Time Password Expired'
       when '1234qwer'
