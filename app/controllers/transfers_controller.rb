@@ -2,7 +2,7 @@ class TransfersController < ApplicationController
   before_action :set_transfer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transfers = Transfer.all
+    @transfers = Transfer.includes(:currency, :account, :payee).all
     respond_with(@transfers)
   end
 

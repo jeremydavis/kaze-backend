@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   def index
-    @accounts = Account.all
+    @accounts = Account.includes(:currency).all
     respond_with(@accounts)
   end
 
