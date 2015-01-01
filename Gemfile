@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'puma'
 gem 'ember-cli-rails'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
