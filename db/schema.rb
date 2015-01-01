@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222060346) do
+ActiveRecord::Schema.define(version: 20150101082745) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "account_number", limit: 255
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20141222060346) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
