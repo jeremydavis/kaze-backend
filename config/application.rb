@@ -21,3 +21,5 @@ module KazeBackend
     # config.i18n.default_locale = :de
   end
 end
+
+ActiveSupport::JSON::Encoding.time_precision = 0
