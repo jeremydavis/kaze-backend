@@ -7,9 +7,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
+    update_authentication_token if authentication_token.blank?
+  end
+
+  def update_authentication_token
+    self.authentication_token = generate_authentication_token
+  end
+
+  def update_authentication_token!
+    self.update_authentication_token
+    self.save
   end
 
   private

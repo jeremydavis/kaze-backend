@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
         user       = user_email && User.find_by_email(user_email)
         parsed_token = token.match(/^user_token="(.*?)$/)[1] # Token is not being presented correctly
         if user && Devise.secure_compare(user.authentication_token, parsed_token)
+          request.env["devise.skip_trackable"] = true
           sign_in user, store: false
         end
       end
