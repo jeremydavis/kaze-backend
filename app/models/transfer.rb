@@ -43,7 +43,7 @@ class Transfer < ActiveRecord::Base
     end
   end
   def repeat_until_date_is_after_transfer_date
-    if !self.repeat_until || self.repeat_until <= (self.transfer_date >> 1)
+    if !self.repeat_until || self.repeat_until < (self.transfer_date >> 1)
       errors.add(:repeat_until, 'Repeat transfers must last for at least 1 month')
     end
   end
