@@ -6,13 +6,6 @@ GIT
       railties (>= 3.1)
 
 GIT
-  remote: git://github.com/elevation/detect_timezone_rails.git
-  revision: 92aa34c192ba3ab9a5e5d8371cc56af5f569715e
-  specs:
-    detect_timezone_rails (0.0.3)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/jayzes/cucumber-api-steps.git
   revision: 0cc7047901583863d2d1eb13c6a62c0b23603986
   specs:
@@ -37,8 +30,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    action_mailer_cache_delivery (0.3.7)
-      actionmailer (>= 3.0)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -88,23 +79,14 @@ GEM
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     builder (3.2.2)
-    cancan (1.6.10)
     capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    childprocess (0.5.5)
-      ffi (~> 1.0, >= 1.0.11)
-    chronic (0.10.2)
     cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
@@ -136,12 +118,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    email_spec (1.6.0)
-      launchy (~> 2.1)
-      mail (~> 2.2)
-    ember-cli-rails (0.0.10)
-      railties (~> 4.0)
-      sprockets-rails (~> 2.0)
     erubis (2.7.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
@@ -211,7 +187,6 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.6.0)
     libv8 (3.16.14.7)
-    liquid (3.0.0)
     listen (2.8.4)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -232,10 +207,6 @@ GEM
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
-    paper_trail (3.0.6)
-      activerecord (>= 3.0, < 5.0)
-      activesupport (>= 3.0, < 5.0)
-    phantomjs (1.9.7.1)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -286,8 +257,6 @@ GEM
     ref (1.0.5)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
-    reverse_markdown (0.6.0)
-      nokogiri
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -310,7 +279,6 @@ GEM
     rspec-support (3.1.2)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
-    rubyzip (1.1.6)
     sass (3.4.9)
     sass-rails (5.0.0)
       railties (>= 4.0.0, < 5.0)
@@ -318,18 +286,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    selenium-webdriver (2.44.0)
-      childprocess (~> 0.5)
-      multi_json (~> 1.0)
-      rubyzip (~> 1.0)
-      websocket (~> 1.0)
     sexp_processor (4.4.4)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    site_prism (2.6)
-      addressable (~> 2.3.3)
-      capybara (>= 2.1, < 3.0)
     slop (3.6.0)
     spring (1.2.0)
     spring-commands-cucumber (1.0.1)
@@ -357,7 +317,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    timecop (0.7.1)
     timers (4.0.1)
       hitimes
     turbolinks (2.5.3)
@@ -369,7 +328,6 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket (1.2.1)
     websocket-driver (0.5.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.1)
@@ -380,26 +338,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_mailer_cache_delivery
   autoprefixer-rails
   bcrypt
   better_errors
   binding_of_caller
   bootstrap-sass
-  cancan
   capybara
-  carrierwave
-  chronic
   coffee-rails
   cucumber
   cucumber-api-steps!
   cucumber-rails
   database_cleaner!
   datetimepicker-rails!
-  detect_timezone_rails!
   devise
-  email_spec
-  ember-cli-rails
   factory_girl_rails
   guard
   guard-bundler
@@ -410,25 +361,18 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
-  liquid
   lorem
   momentjs-rails (>= 2.8.1)!
-  nokogiri
-  paper_trail
-  phantomjs
   poltergeist
   puma
   quiet_assets
-  rails
+  rails (~> 4.2.0)
   rails-timeago
   rb-fsevent
   responders (~> 2.0)
-  reverse_markdown
   rspec-rails
   sass-rails
-  selenium-webdriver
   simple_form
-  site_prism
   spring
   spring-commands-cucumber
   spring-commands-rspec
@@ -436,6 +380,5 @@ DEPENDENCIES
   symbolize
   terminal-notifier-guard
   therubyracer
-  timecop
   turbolinks
   uglifier
