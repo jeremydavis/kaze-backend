@@ -15,6 +15,9 @@
 //= require rails-timeago
 //= require turbolinks
 //
+// Bootstrap Dependencies
+//= require bootstrap
+//
 // Datetimepicker Dependencies
 //= require moment
 //= require bootstrap-datetimepicker
