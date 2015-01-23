@@ -7,58 +7,125 @@ module Confirmable
     attr_accessor :transaction_hash
     attr_accessor :otp_was_requested
 
-    validates_presence_of :transaction_password, if: -> { self.transaction_hash.blank? }, on: :create
-    validate  :confirm_transaction_password, on: :create
-    validate  :confirm_transaction_hash, unless: -> { self.transaction_hash.blank? }, on: :create
-    validate  :confirm_one_time_password, on: :create
-
-    after_validation :clear_transaction_password, if: :transaction_password
-    after_validation :clear_one_time_password, if: :one_time_password
+    after_validation on: :create do
+      confirm_transaction!
+      clear_transaction_password!
+      clear_one_time_password!
+    end
 
     before_save :abort_if_validity_flags_not_set
   end
 
-  def request_one_time_password
+  def confirm_transaction_params
+    ( self.transaction_keys & self.errors.messages.keys ).empty?
+  end
+  def confirm_transaction_hash
+    TxnSystem.valid_transaction_hash?(transaction_params, transaction_hash)
+  end
+  def confirm_transaction_password
+    TxnSystem.valid_transaction_password? self.transaction_password
+  end
+  def confirm_one_time_password
+    OtpSystem.valid_one_time_password? self.one_time_password
+  end
+
+  def request_one_time_password!
+    OtpSystem.request_one_time_password
     self.otp_was_requested = true
+    errors.add :one_time_password, 'Please enter the OTP sent to your phone'
   end
 
   private
-    def confirm_transaction_password
-      return unless self.transaction_hash.blank?
-      case transaction_password
-      when '123'
-        errors.add :transaction_password, 'Transaction Password Expired'
-      when '123qwe'
-        self.initiated_at = Time.now
-        self.transaction_password_valid = true
-        self.transaction_hash = calculate_transaction_hash(transaction_params)
-        request_one_time_password
+
+    def confirm_transaction!
+      if self.transaction_hash.blank?
+        return unless confirm_transaction_params!
+        return unless confirm_transaction_password!
+        request_one_time_password!
       else
-        errors.add :transaction_password, "Transaction Password Invalid"
+        return unless confirm_transaction_hash!
+        confirm_one_time_password!
       end
     end
 
-    def confirm_transaction_hash
-      if valid_transaction_hash? transaction_params, transaction_hash
-        self.transaction_password_valid = true
+    def only_otp_or_txn_not_both
+      clear_one_time_password if !self.transaction_password.blank? && !self.one_time_password.blank?
+    end
+
+    def confirm_transaction_params!
+      if confirm_transaction_params
+        return valid_transaction_params!
       else
-        self.transaction_hash = nil
-        self.initiated_at = nil
-        errors.add :transaction_password, "Transaction Details Changed After Transaction Password Confirmed"
+        return invalid_transaction_params!
+      end
+    end
+    def valid_transaction_params!
+      return true
+    end
+    def invalid_transaction_params!
+      if self.transaction_password.blank?
+        errors.add :transaction_password_valid, 'Required'
+        return false
+      else
+        errors.add :transaction_password, 'Please complete all fields before entering Transaction Password'
+        return false
       end
     end
 
-    def confirm_one_time_password
-      case one_time_password
-      when ''
-        errors.add :one_time_password, 'Please enter the OTP sent to your phone'
-      when '1234'
-        errors.add :one_time_password, 'One Time Password Expired'
-      when '1234qwer'
-        self.one_time_password_valid = true
+    def confirm_transaction_hash!
+      if confirm_transaction_hash
+        return valid_transaction_hash!
       else
-        errors.add :one_time_password, "One Time Password Invalid"
+        return invalid_transaction_hash!
       end
+    end
+    def valid_transaction_hash!
+      self.transaction_password_valid = true
+      return true
+    end
+    def invalid_transaction_hash!
+      self.transaction_hash = nil
+      self.initiated_at = nil
+      errors.add :transaction_password, "Transaction Details Changed After Transaction Password Confirmed"
+      return false
+    end
+
+    def confirm_transaction_password!
+      if confirm_transaction_password
+        return valid_transaction_password!
+      else
+        return invalid_transaction_password!
+      end
+    end
+    def valid_transaction_password!
+      self.transaction_password_valid = true
+      set_transaction_hash!
+      return true
+    end
+    def invalid_transaction_password!
+      errors.add :transaction_password, "Transaction Password Invalid"
+      return false
+    end
+
+    def confirm_one_time_password!
+      if confirm_one_time_password
+        return valid_one_time_password!
+      else
+        return invalid_one_time_password
+      end
+    end
+    def valid_one_time_password!
+      self.one_time_password_valid = true
+      return true
+    end
+    def invalid_one_time_password
+      errors.add :one_time_password, "One Time Password Invalid"
+      return false
+    end
+
+    def set_transaction_hash!
+      self.initiated_at = Time.now
+      self.transaction_hash = TxnSystem.calculate_transaction_hash(transaction_params)
     end
 
     def transaction_params
@@ -69,24 +136,11 @@ module Confirmable
       return params_hash
     end
 
-    def secret_transaction_key
-      @@secret_transaction_key ||= ENV["SECRET_CONFIRM_KEY"] ||= '1234'
-    end
-
-    def calculate_transaction_hash transaction
-      payload = "#{secret_transaction_key} #{transaction.to_json} #{secret_transaction_key}"
-      Digest::SHA2.new.update(payload)
-    end
-
-    def valid_transaction_hash? transaction, transaction_hash
-      calculate_transaction_hash(transaction) == transaction_hash
-    end
-
-    def clear_transaction_password
+    def clear_transaction_password!
       self.transaction_password = nil
     end
 
-    def clear_one_time_password
+    def clear_one_time_password!
       self.one_time_password = nil
     end
 
@@ -97,4 +151,37 @@ module Confirmable
   # methods to extend the class
   # module ClassMethods
   # end
+end
+
+class TxnSystem
+  def self.valid_transaction_hash? transaction, transaction_hash
+    generate_transaction_hash(transaction) == transaction_hash
+  end
+
+  def self.valid_transaction_password? password
+    Rails.logger.debug("here")
+    password == '123qwe'
+  end
+
+  def self.calculate_transaction_hash transaction
+    generate_transaction_hash transaction
+  end
+
+  private
+    def self.generate_transaction_hash transaction
+      payload = "#{secret_transaction_key} #{transaction.to_json} #{secret_transaction_key}"
+      Digest::SHA2.new.update(payload)
+    end
+    def self.secret_transaction_key
+      @@secret_transaction_key ||= ENV["SECRET_CONFIRM_KEY"] ||= '1234'
+    end
+end
+
+class OtpSystem
+  def self.valid_one_time_password? password
+    password == '1234qwer'
+  end
+  def self.request_one_time_password
+    return true
+  end
 end
