@@ -143,7 +143,6 @@ module Confirmable
     def clear_transaction_password!
       self.transaction_password = nil
     end
-
     def clear_one_time_password!
       self.one_time_password = nil
     end
@@ -161,12 +160,10 @@ class TxnSystem
   def self.valid_transaction_hash? transaction, transaction_hash
     generate_transaction_hash(transaction) == transaction_hash
   end
-
   def self.valid_transaction_password? password
     Rails.logger.debug("here")
     password == '123qwe'
   end
-
   def self.calculate_transaction_hash transaction
     generate_transaction_hash transaction
   end
