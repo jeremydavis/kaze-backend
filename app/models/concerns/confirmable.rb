@@ -41,6 +41,7 @@ module Confirmable
       if self.transaction_hash.blank?
         return unless confirm_transaction_params!
         return unless confirm_transaction_password!
+        set_transaction_hash!
         request_one_time_password!
       else
         return unless confirm_transaction_hash!
@@ -99,7 +100,6 @@ module Confirmable
     end
     def valid_transaction_password!
       self.transaction_password_valid = true
-      set_transaction_hash!
       return true
     end
     def invalid_transaction_password!
