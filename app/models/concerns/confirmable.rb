@@ -103,7 +103,11 @@ module Confirmable
       return true
     end
     def invalid_transaction_password!
-      errors.add :transaction_password, "Transaction Password Invalid"
+      if self.transaction_password.blank?
+        errors.add :transaction_password, "Please enter your Transaction Password"
+      else
+        errors.add :transaction_password, "Transaction Password Invalid"
+      end
       return false
     end
 
@@ -119,7 +123,11 @@ module Confirmable
       return true
     end
     def invalid_one_time_password
-      errors.add :one_time_password, "One Time Password Invalid"
+      if self.one_time_password.blank?
+        errors.add :one_time_password, "Please enter the OTP sent to your phone"
+      else
+        errors.add :one_time_password, "One Time Password Invalid"
+      end
       return false
     end
 
