@@ -83,7 +83,7 @@ module Confirmable
     def invalid_transaction_hash!
       self.transaction_hash = nil
       self.initiated_at = nil
-      errors.add :transaction_password, "Transaction Details Changed After Transaction Password Confirmed"
+      errors.add :transaction_password, "Transaction Details changed after Transaction Password Confirmed"
       return false
     end
 
