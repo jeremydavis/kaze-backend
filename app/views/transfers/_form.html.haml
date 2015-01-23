@@ -1,5 +1,4 @@
 = simple_form_for(@transfer) do |f|
-  = f.error_notification
 
   .form-inputs
     = f.input :transaction_hash, as: :hidden
@@ -20,8 +19,10 @@
       = f.input :repeat
       = f.input :repeat_until, as: :date_picker
     .form-group
-      = f.input :transaction_password, as: :string
-      = f.input :one_time_password, as: :string
+      - if @transfer.transaction_password_valid?
+        = f.input :one_time_password, as: :string
+      - else
+        = f.input :transaction_password, as: :string
 
   .form-actions
     .well.col-sm-9.col-sm-offset-3
