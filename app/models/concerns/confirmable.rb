@@ -49,10 +49,6 @@ module Confirmable
       end
     end
 
-    def only_otp_or_txn_not_both
-      clear_one_time_password if !self.transaction_password.blank? && !self.one_time_password.blank?
-    end
-
     def confirm_transaction_params!
       if confirm_transaction_params
         return valid_transaction_params!
