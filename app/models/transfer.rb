@@ -19,6 +19,8 @@ class Transfer < ActiveRecord::Base
   validate :transfer_date_is_in_the_future, if: :transfer_date, on: :create
   validate :repeat_until_date_is_after_transfer_date, if: :repeat?
 
+  validates_format_of :value, with: /\A\d+\.?\d{0,2}\z/, message: 'maximum of 2 decimal places'
+
   before_create :set_status_as_submitted
 
   # List of keys used for transactino confirmation

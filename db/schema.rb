@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101082745) do
+ActiveRecord::Schema.define(version: 20150123070402) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "account_number", limit: 255
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150101082745) do
     t.integer  "account_id"
     t.integer  "payee_id"
     t.integer  "currency_id"
-    t.decimal  "value"
+    t.string   "value"
     t.text     "description"
     t.date     "transfer_date"
     t.boolean  "repeat"
