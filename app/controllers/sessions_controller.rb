@@ -4,7 +4,6 @@ class SessionsController < Devise::SessionsController
       format.html { super }
       format.json do
         self.resource = warden.authenticate!(auth_options)
-        self.resource.update_authentication_token!
         self.resource.save
         sign_in(resource_name, resource)
         data = {

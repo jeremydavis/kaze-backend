@@ -7,16 +7,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def ensure_authentication_token
-    update_authentication_token if authentication_token.blank?
+    update_authentication_token if current_sign_in_at_changed?
   end
 
   def update_authentication_token
     self.authentication_token = generate_authentication_token
-  end
-
-  def update_authentication_token!
-    self.update_authentication_token
-    self.save
   end
 
   private
