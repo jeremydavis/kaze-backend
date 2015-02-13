@@ -1,11 +1,11 @@
 = simple_form_for(@transfer) do |f|
 
   .form-inputs
-    = f.input :transaction_hash, as: :hidden
-    = f.input :initiated_at, as: :hidden
-    //= f.input :otp_was_requested, as: :hidden
+    = f.input :transaction_hash,           as: :hidden
+    = f.input :initiated_at,               as: :hidden
+    //= f.input :otp_was_requested,          as: :hidden
     //= f.input :transaction_password_valid, as: :hidden
-    //= f.input :one_time_password_valid, as: :hidden
+    //= f.input :one_time_password_valid,    as: :hidden
     .form-group
       = f.association :account, prompt: 'Select an Account'
     .form-group

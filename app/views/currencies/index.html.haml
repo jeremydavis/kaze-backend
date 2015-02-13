@@ -1,5 +1,8 @@
 %h1 Listing currencies
 
+#indexhead
+  .paginator= paginate @currencies
+
 %table.table.table-striped.table-condensed.table-hover
   %thead
     %tr
@@ -19,6 +22,7 @@
           &nbsp;|&nbsp;
           = link_to t('Destroy'), currency, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+#indexfoot
+  .paginator= paginate @currencies
 
 = link_to t('New Currency'), new_currency_path

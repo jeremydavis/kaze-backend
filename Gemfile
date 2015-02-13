@@ -16,6 +16,7 @@ gem 'turbolinks'
 gem 'devise'
 gem 'bcrypt'
 gem 'rails-timeago'
+gem 'kaminari'
 
 # Datetime Picker
 gem 'momentjs-rails', '>= 2.8.1', :github => 'derekprior/momentjs-rails'

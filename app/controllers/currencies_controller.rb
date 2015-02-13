@@ -2,7 +2,7 @@ class CurrenciesController < ApplicationController
   before_action :set_currency, only: [:show, :edit, :update, :destroy]
 
   def index
-    @currencies = Currency.all
+    @currencies = Currency.page(params[:page])
     respond_with(@currencies)
   end
 
